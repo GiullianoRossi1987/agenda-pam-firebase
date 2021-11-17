@@ -1,13 +1,43 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Dimension } from 'react-native';
+import firebase from './components/Firebase.js';
+import database from '@firebase/database';
+import { useNavigation } from '@react-navigation/core';
+
+
+const Stack = createNativeStackNavigator();
+
+// telas
+import criaEvento from './components/CriaEvento.js';
+
+
+function Home(){
+	const navigation = useNavigation();
+	return (
+		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+		      <Text>Home Screen</Text>
+		      <TouchableOpacity onPress={() => navigation.navigate('criaEvento')}>
+			      <Text>Criar Evento</Text>
+		      </TouchableOpacity>
+			      <TouchableOpacity onPress={() => {}}>
+				<Text>Ver eventos de Hoje</Text>
+		      </TouchableOpacity>
+          	</View>
+	);
+}
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+   return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+	      <Stack.Screen name="Home" component={Home}/>
+	      <Stack.Screen name="criaEvento" component={criaEvento}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
