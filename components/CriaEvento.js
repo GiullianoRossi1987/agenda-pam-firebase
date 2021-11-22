@@ -16,12 +16,12 @@ const styles = StyleSheet.create({
 
 export default function criaEvento(){
 	const navigation = useNavigation();
-	const [evento, setEvento] = useState();
-	const [dataI, setDataI] = useState();
-	const [desc, setDesc] = useState();
-	const [dataF, setDataF] = useState();
+	const [evento, setEvento] = useState('');
+	const [dataI, setDataI] = useState('');
+	const [desc, setDesc] = useState('');
+	const [dataF, setDataF] = useState('');
 
-	async function addEvento(evento, dataI, desc, dataF){
+	async function addEvento(){
 		let lake = await firebase.database().ref("eventos");
 		let k = lake.push().key;
 		let data = {
@@ -40,18 +40,18 @@ export default function criaEvento(){
 	return(
 		<View>
 			<Text>Evento: </Text>
-			<TextInput name={evento} onTextChange={(text) => setEvento(text)}/>
+			<TextInput value={evento} onChangeText={(text)=>setEvento(text)}/>
 
 			<Text>Data Início: </Text>
-			<TextInput name={dataI} onTextChange={(text) => setDataI(text)}/>
+			<TextInput value={dataI} onChangeText={(text) => setDataI(text)}/>
 
 			<Text>Data Fim: </Text>
-			<TextInput name={dataF} onTextChanges={(text) => setDataF(text)}/>
+			<TextInput value={dataF} onChangeText={text => setDataF(text)}/>
 
 			<Text>Descrição: </Text>
-			<TextInput name={desc} onTextChange={(text) => setDesc(text)}/>
+			<TextInput value={desc} onChangeText={text => setDesc(text)}/>
 
-			<TouchableOpacity style={styles.button} onPress={() => addEvento(evento, dataI, desc, dataF)}>
+			<TouchableOpacity style={styles.button} onPress={addEvento}>
 				<Text>Teste</Text>
 			</TouchableOpacity>
 		</View>

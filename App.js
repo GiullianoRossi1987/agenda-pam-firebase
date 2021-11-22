@@ -12,6 +12,7 @@ const Stack = createNativeStackNavigator();
 
 // telas
 import criaEvento from './components/CriaEvento.js';
+import listaEventos from './components/ListaEventos.js'
 
 
 function Home(){
@@ -22,7 +23,7 @@ function Home(){
 		      <TouchableOpacity onPress={() => navigation.navigate('criaEvento')}>
 			      <Text>Criar Evento</Text>
 		      </TouchableOpacity>
-			      <TouchableOpacity onPress={() => {}}>
+			      <TouchableOpacity onPress={() => {navigation.navigate('Eventos')}}>
 				<Text>Ver eventos de Hoje</Text>
 		      </TouchableOpacity>
           	</View>
@@ -36,6 +37,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="Home">
 	      <Stack.Screen name="Home" component={Home}/>
 	      <Stack.Screen name="criaEvento" component={criaEvento}/>
+	      <Stack.Screen name="Eventos" component={listaEventos}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
