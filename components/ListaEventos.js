@@ -9,21 +9,39 @@ var needsReload = false;
 const styles = StyleSheet.create({
 	eventoContainer: {
 		flex: 1,
-		borderWidth: 20,
+		borderWidth: 1,
 		borderColor: 'black',
+		width: 500,
 		height: 200,
-		marginTop: 10
+		marginTop: 10,
+		padding: 20,
+		alignSelf: 'center',
+		flexDirection: 'row',
+		justifyContent: 'flex-start',
 	},
+	buttonD: {
+		backgroundColor: 'red',
+		borderColor: 'black',
+		borderWidth: 1,
+		color: 'white',
+		padding: 10,
+		maxWidth: 200,
+	},
+	buttonW: {
+		backgroundColor: 'yellow',
+		borderColor: 'black',
+		borderWidth: 1,
+		padding: 10,
+		color: 'white',
+		maxWidth: 200,
+	},
+	modal: {
+		flex: 1,
+		maxHeight: 700,
+	},
+
+
 });
-
-class Evento extends Component{
-
-	render(){
-		return (
-			<View style={styles.eventoContainer}></View>
-		);
-	}
-}
 
 export default function listaEventos(){
 	const [lista_eventos, setLista] = useState([]);
@@ -82,14 +100,14 @@ export default function listaEventos(){
 		}
 		return (
 			<View style={styles.eventoContainer}>
-				<Text>{item.evento}</Text>
-				<Text>{item.descricao}</Text>
-				<Text>{item.data_inicio}</Text>
-				<Text>{item.data_fim}</Text>
-				<TouchableOpacity onPress={delEvento}>
+				<Text><b>Evento: </b>{item.evento}</Text>
+				<Text><b>Descrição: </b><br/>{item.descricao}</Text>
+				<Text><b>Data de Início: </b>{item.data_inicio}</Text>
+				<Text><b>Data de Fim: </b>{item.data_fim}</Text>
+				<TouchableOpacity onPress={delEvento} style={styles.buttonD}>
 					<Text>Deletar</Text>
 				</TouchableOpacity>
-				<TouchableOpacity onPress={set2Update}>
+				<TouchableOpacity onPress={set2Update} style={styles.buttonW}>
 					<Text>Alterar</Text>
 				</TouchableOpacity>
 			</View>
@@ -131,6 +149,7 @@ export default function listaEventos(){
 			 animationType="slide"
 			 visible={mVisible}
 			 transparent={false}
+			 style={styles.modal}
 			 >
 				<View>
 					<Text>Evento: </Text>
@@ -145,7 +164,7 @@ export default function listaEventos(){
 					<Text>Descrição: </Text>
 						<TextInput value={mDesc} onChangeText={text => setMDesc(text)}/>
 
-					<TouchableOpacity style={styles.button} onPress={updateEvento}>
+					<TouchableOpacity style={styles.button} onPress={updateEvento} style={styles.buttonD}>
 						<Text>Alterar</Text>
 					</TouchableOpacity>
 					<TouchableOpacity onPress={unsetModal}>
